@@ -50,3 +50,23 @@ H2
 
 ________
 
+
+### 超链接
+
+#### 行内式
+
+格式为 [link text](URL 'title text')。
+
+[Google](http://www.google.com/)
+
+#### 参考式
+参考式链接的写法相当于行内式拆分成两部分，并通过一个 识别符 来连接两部分。参考式能尽量保持文章结构的简单，也方便统一管理 URL。
+
+[Google][link]
+
+[Google]: http://www.google.com/ "Google"
+
+#### 自动链接
+使用 <> 包括的 URL 或邮箱地址会被自动转换为超链接：
+
+<http://www.google.com/>
