@@ -1,13 +1,11 @@
-     Hello：
-              我把学习的全部东西都记录下来，一方面，用于记录我的学习过程，还有方便为我指出错误和欠缺。
-             第一次做日报，格式或者内容方面有什么不妥之处，请给我指出，我一定会改进。
        		
-一、	Docker安装配置
-1.	Windows下Docker安装
+#	Docker安装配置
+####Windows下Docker安装
 1)	、下载Docker for Windows，按照指示安装（docker version命令查看docker版本）
 2)	、Hyper-V：如果没有开启Hyper-V功能，可以在“启动或关闭windows功能”中添加
 3)	、设置国内镜像仓库：Setting—Daemon----Registry mirrors(http://0522f34d.m.daocloud.io)
-2.	Linux下Docker安装（Ubantu 14.04）
+
+####	Linux下Docker安装（Ubantu 14.04）
 1)	sudo apt-get update
 2)	sudo apt-get install apt-transport-https ca-certificates
 3)	sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
@@ -21,7 +19,7 @@
 （这些命令还没实验过）
 运行sudo service docker start 启动Docker守护进程，运行docker version 查看Docker版本
 启动第一个Docker容器（docker  run hello world）
-二、	Docker基础命令
+####	Docker基础命令
 1.	docker pull:从仓库中拖镜像
 2.	docker run:运行容器，如果当前要运行的容器对应的镜像不存在，会自动拉取
 3.	docker stop：停止容器运行
@@ -37,24 +35,25 @@
 1.	创建镜像
 1)	使用Dockerfile指令来创建一个新的镜像
 在使用Dockerfile创建容器之前，需要先准备一个Dockerfile文件，然后运行docker build命令创建镜像
-# This dockerfile uses the Ubuntu image
-# VERSION 2
-# Author: docker_user
-# Command format: Instruction [arguments / command] …
 
-# 第一行必须指定基于的容器镜像
-FROM ubuntu:14.04
-# 维护者信息
-MAINTAINER docker_user docker_user@email.com
+     # This dockerfile uses the Ubuntu image
+     # VERSION 2
+     # Author: docker_user
+     # Command format: Instruction [arguments / command] …
 
-# 镜像的操作指令
-RUN apt-get update
+    # 第一行必须指定基于的容器镜像
+    FROM ubuntu:14.04
+    # 维护者信息
+    MAINTAINER docker_user docker_user@email.com
 
-RUN apt-get -y install ntp
+    # 镜像的操作指令
+    RUN apt-get update
 
-EXPOSE 5555
-# 容器启动时执行指令
-CMD ["/usr/sbin/ntpd"]
+    RUN apt-get -y install ntp
+
+    EXPOSE 5555
+    # 容器启动时执行指令
+    CMD ["/usr/sbin/ntpd"]
 
 2)	、从已经创建的容器中更新镜像，并且提交这个镜像
 docker commit –m “create images” –a “author info” old_id  new_name  
@@ -64,8 +63,8 @@ docker commit –m “create images” –a “author info” old_id  new_name
 4.	查看已下载的镜像 docker images [-a]
 5.	给镜像添加标签 docker tag [OPTIONS] IMAGE [:TAG] [REGISTRYHOST/][USERNAME/] NAME [:TAG]
 6.	删除镜像 docker rmi [OPTIONS] IMAGE [IMAGE…]
-#按标签删除：多个标签，仅会删除当前标签，不会删除镜像
-#按ID删除：直接删除镜像
+     #按标签删除：多个标签，仅会删除当前标签，不会删除镜像
+     #按ID删除：直接删除镜像
 --f,--force 强制删除镜像
 --no-prune 不删除untaged parents
 7.	导入镜像 docker load –input Ubuntu_latest.atr或docker load<Ubuntu_laest.tar
