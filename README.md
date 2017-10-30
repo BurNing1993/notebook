@@ -18,9 +18,11 @@ from Oct 17,2017
    
    需求详见附件，请新勇帮忙录入到社区
 
-其他资料
+
 FlexVolume: https://github.com/kubernetes/community/blob/master/contributors/devel/flexvolume.md
+
 fuxi-kubernetes: https://github.com/openstack/fuxi-kubernetes
+
 opensds-k8s: https://github.com/leonwanghui/opensds-k8s
 
 Modules	Features	Priority	Status	Target Status	Owners (github id)	Reviewers (github id)	Planned Completion Date	Related Issues
