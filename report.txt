@@ -1,0 +1,6 @@
+Daily report
+10/31
+Hello :
+    今天开始集中精力看FlexVolume,先看了opensds-k8s，又在github上搜索相关的资料查阅。
+    1、opensds-k8s代码、文档
+    2、aliyun-disk flex-volume相关代码 
