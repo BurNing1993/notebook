@@ -196,3 +196,5 @@ hello：
 今天，先把刚上传的FlexVolume的代码看了一下，代码本身还是能理解，只是其中的逻辑不是很清楚。
 了解Attach，Detach，Mount，Unmount操作的过程,研究了一下aliyun-disk的相关代码
 K8s flexVolume 的文档
+感觉你可以动手试试在Ubuntu上安装K8S就可以了，Centos安装过程类似，而且开源这边平常用的不多。
+另外有空的话也熟悉下Mesos的安装吧，据说Mesos目前支持CSI已经Ready，我们准备搭建一个Mesos的环境来对接OpenSDS。
