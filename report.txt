@@ -198,3 +198,8 @@ hello：
 K8s flexVolume 的文档
 感觉你可以动手试试在Ubuntu上安装K8S就可以了，Centos安装过程类似，而且开源这边平常用的不多。
 另外有空的话也熟悉下Mesos的安装吧，据说Mesos目前支持CSI已经Ready，我们准备搭建一个Mesos的环境来对接OpenSDS。
+已经录入到google doc里面了，这个建议以后都在google doc上面操作吧，抄写的好辛苦
+佳俊和程飞也可以访问这个地址看看，Owner列认领下你们的工作，谢谢。
+
+https://docs.google.com/spreadsheets/d/12BcHYuWXw4-cT4OAJR5zi4S1EO9JL-5gZ4hQmGz856w/edit#gid=639082437
+
