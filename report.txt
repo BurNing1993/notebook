@@ -191,3 +191,8 @@ kubectl get services
  
 到此K8S集群部署完成。
 
+11/3
+hello：
+今天，先把刚上传的FlexVolume的代码看了一下，代码本身还是能理解，只是其中的逻辑不是很清楚。
+了解Attach，Detach，Mount，Unmount操作的过程,研究了一下aliyun-disk的相关代码
+K8s flexVolume 的文档
