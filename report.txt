@@ -203,3 +203,28 @@ K8s flexVolume 的文档
 
 https://docs.google.com/spreadsheets/d/12BcHYuWXw4-cT4OAJR5zi4S1EO9JL-5gZ4hQmGz856w/edit#gid=639082437
 
+
+11/6
+Mesos Ubuntu 安装 
+Mesos 架构
+k8s安装：上次的k8s安装会自动从GitHub获取最新版， 获取指定版本K8s;
+1.获取指定版本源码：wget https://github.com/kubernetes/kubernetes/archive/v1.8.2.tar.gz
+2.解压后执行 cd kubernetes
+3.make quick-release
+
+
+    Ubuntu 16.04 
+    # Update the packages.
+$ sudo apt-get update
+
+# Install a few utility tools.
+$ sudo apt-get install -y tar wget git
+
+# Install the latest OpenJDK.
+$ sudo apt-get install -y openjdk-8-jdk
+
+# Install autotools (Only necessary if building from git repository).
+$ sudo apt-get install -y autoconf libtool
+
+# Install other Mesos dependencies.
+$ sudo apt-get -y install build-essential python-dev python-six python-virtualenv libcurl4-nss-dev libsasl2-dev libsasl2-modules maven libapr1-dev libsvn-dev zlib1g-dev
