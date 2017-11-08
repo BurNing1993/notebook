@@ -103,12 +103,12 @@ cd ~/go/src/kubernetes/_output/release-stage/client/linux-amd64/kubernetes/clien
 
 cp * /usr/bin
 
-注： 下述操作中的192.168.56.104 请替换为你安装K8S的主机的IP地址 
+注： 下述操作中的10.0.2.15 请替换为你安装K8S的主机的IP地址 
 
 6 启动和测试Etcd
 K8S使用Etcd保存Master和Node节点的信息，所以启动K8S之前需要先启动Etcd
 1) 启动Etcd
-etcd -initial-advertise-peer-urls http://192.168.56.104 :2380 -listen-peer-urls http://192.168.56.104 :2380 -listen-client-urls http://192.168.56.104 :2379,http://127.0.0.1:2379 -advertise-client-urls http://192.168.56.104 :2379 
+etcd -initial-advertise-peer-urls http://10.0.2.15 :2380 -listen-peer-urls http://10.0.2.15 :2380 -listen-client-urls http://10.0.2.15 :2379,http://127.0.0.1:2379 -advertise-client-urls http://10.0.2.15 :2379 
 2) 读写Etcd Key和Value
 etcdctl set foo bar
 etcdctl get foo
@@ -121,7 +121,7 @@ flanneld
  
 2) 设置Etcd配置Flannel
 etcdctl set /coreos.com/network/config '{"Network":"172.17.0.0/16"}'
-etcdctl set /coreos.com/network/subnets/172.17.10.0-24 '{"PublicIP":"192.168.56.104 "}'
+etcdctl set /coreos.com/network/subnets/172.17.10.0-24 '{"PublicIP":"10.0.2.15 "}'
  
 3) 设置Flannel关联Docker
 mk-docker-opts.sh -i
@@ -133,25 +133,25 @@ service docker restart
   
 8 启动K8S
 1) 启动kube-apiserver
-kube-apiserver --address=0.0.0.0  --insecure-port=8080 --service-cluster-ip-range='10.10.10.1/24' --log_dir=/usr/local/kubernete_test/logs/kube --kubelet_port=10250 --v=0 --logtostderr=false --etcd_servers=http://192.168.56.104 :2379 --allow_privileged=false 
+kube-apiserver --address=0.0.0.0  --insecure-port=8080 --service-cluster-ip-range='10.10.10.1/24' --log_dir=/usr/local/kubernete_test/logs/kube --kubelet_port=10250 --v=0 --logtostderr=false --etcd_servers=http://10.0.2.15 :2379 --allow_privileged=false 
  
 2) 启动kube-controller-manager
-kube-controller-manager  --v=0 --logtostderr=false --log_dir=/usr/local/kubernete_test/logs/kube --master=192.168.56.104 :8080
+kube-controller-manager  --v=0 --logtostderr=false --log_dir=/usr/local/kubernete_test/logs/kube --master=10.0.2.15 :8080
  
 3) 启动kube-scheduler 
-kube-scheduler  --master='192.168.56.104 :8080' --v=0  --log_dir=/usr/local/kubernete_test/logs/kube
+kube-scheduler  --master='10.0.2.15 :8080' --v=0  --log_dir=/usr/local/kubernete_test/logs/kube
  
 4) 测试master节点是否正常启动
 kubectl get componentstatuses
  
 5) 启动kube-proxy 
-kube-proxy  --logtostderr=false --v=0 --master=http://192.168.56.104 :8080
+kube-proxy  --logtostderr=false --v=0 --master=http://10.0.2.15 :8080
  
 6) 启动kubelet  
-kubelet  --logtostderr=false --v=0 --allow-privileged=false  --log_dir=/usr/local/kubernete_test/logs/kube  --address=0.0.0.0  --port=10250  --hostname_override=192.168.56.104   --api_servers=http://192.168.56.104 :8080
+kubelet  --logtostderr=false --v=0 --allow-privileged=false  --log_dir=/usr/local/kubernete_test/logs/kube  --address=0.0.0.0  --port=10250  --hostname_override=10.0.2.15   --api_servers=http://10.0.2.15 :8080
  
 7) 在Node上设置集群Context
-kubectl config set-cluster test-cluster --server=http://192.168.56.104 :8080
+kubectl config set-cluster test-cluster --server=http://10.0.2.15 :8080
 kubectl config set-context test-cluster --cluster=test-cluster
 kubectl config use-context test-cluster 
  
@@ -240,3 +240,9 @@ Hello:
 今天主要K8s的安裝，佳俊哥看了一下，可能是是之前搞过分布式的etcd可能有影响，
 给我换了一台虚机，现在安装的过程比较熟悉应该很快会完成。
 K8s安装及问题解决
+
+11/8
+Hello:
+今天是在新环境上安装K8s，安装过程感觉还OK，不过etcd和flannel两个的配置我还是不知道，所有查阅etcd和flannel的相关资料。
+k8s安装
+etcd和flannel相关学习
