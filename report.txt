@@ -246,3 +246,10 @@ Hello:
 今天是在新环境上安装K8s，安装过程感觉还OK，不过etcd和flannel两个的配置我还是不知道，所有查阅etcd和flannel的相关资料。
 k8s安装
 etcd和flannel相关学习
+
+11/9
+Hello；
+k8s的安装过程让我感觉Linux和Docker的知识比较薄弱，所以着重看了这两部分，在自己的电脑上安装linux多操作和进行docker的练习。
+还有自己感觉比较迷茫。
+1.Linux命令、shell学习、练习
+2.docker相关知识学习
