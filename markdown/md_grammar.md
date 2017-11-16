@@ -52,7 +52,7 @@ ________
 
 #### 行内式
 
-格式为 [link text](URL 'title text')。
+格式为 `[Google](http://www.google.com/)`
 
 [Google](http://www.google.com/)
 
