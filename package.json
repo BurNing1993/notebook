@@ -1,0 +1,15 @@
+{
+  "name": "notebook",
+  "version": "0.1.0",
+  "description": "Notebook",
+  "scripts": {
+    "dev": "vuepress dev docs",
+    "build": "vuepress build docs"
+  },
+  "homepage": "https://burning1993.github.io/notebook",
+  "author": "Joey",
+  "license": "MIT",
+  "devDependencies": {
+    "vuepress": "^1.1.0"
+  }
+}
