@@ -19,7 +19,7 @@ docker run \
 --rm \
 --name static \
 -v "$PWD/html":/usr/share/nginx/html \
--v "$PWD/conf":/etc/nginx 
+-v "$PWD/conf":/etc/nginx
 -p 8888:80 \
 -d \
 nginx
