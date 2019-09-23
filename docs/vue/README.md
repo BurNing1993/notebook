@@ -25,3 +25,40 @@ BASE_URL - 会和 vue.config.js 中的 publicPath 选项相符，即你的应用
 ```json
 "dev-build": "vue-cli-service build --mode development",
 ```
+## 部署
+* 同时部署多个Vue Web App,在Home下部署Doc
+
+        
+      Home(默认配置):
+      router:
+        base: process.env.BASE_URL,
+        mode: 'history',
+      Docs:
+        router:
+          base: process.env.BASE_URL,
+          mode: 'history',
+        vue.config.js
+          publicPath: '/docs/',
+      Nginx:
+        server{
+          listen       80;
+          server_name  localhost;
+
+          root   /usr/share/nginx/html;
+          index  index.html index.htm;
+          location / {
+            try_files $uri $uri/ /index.html;
+          }
+
+          location /docs {
+              try_files $uri $uri/ /docs/index.html;
+          }
+          ...
+        }
+
+::: tip
+http://localhost -> home
+
+http://localhost/docs -> docs
+:::
+
