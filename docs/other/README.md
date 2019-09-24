@@ -122,3 +122,33 @@ server_names 设置一个或多个URL,检测Referer头域的值是否是这些UR
 ## Docker
 
 1. [Docker绿皮书](http://docs.nigeerhuo.com/docker/)
+
+## [Github gh-page Action](http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html)
+
+1. react
+::: tip
+需要生成需要 GitHub 密钥,存储在Secrets.ACCESS_TOKEN中
+:::
+
+```yml
+# .github/workflows/gh-pages.yml
+name: GitHub gh-page Actions
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+
+    - name: Build and Deploy
+      uses: JamesIves/github-pages-deploy-action@master
+      env:
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: build
+        BUILD_SCRIPT: npm install && npm run build
+```

@@ -1,7 +1,10 @@
 module.exports = {
   title: 'Notebook',
-  description: 'Notebook',
+  description: 'Notebook,笔记',
   base: '/notebook/',
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.ico' }]
+  ],
   themeConfig: {
     sidebar: 'auto',
     nav: [
