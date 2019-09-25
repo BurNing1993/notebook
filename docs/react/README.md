@@ -193,3 +193,24 @@ function App() {
 
 export default App;
 ```
+
+## React.lazy和Suspense实现动态引入和代码分割
+
+```js
+import React,{Suspense} from 'react';
+const OtherComponent = React.lazy(() => import('./OtherComponent'));
+const AnotherComponent = React.lazy(() => import('./AnotherComponent'));
+
+function MyComponent() {
+  return (
+    <div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <section>
+          <OtherComponent />
+          <AnotherComponent />
+        </section>
+      </Suspense>
+    </div>
+  );
+}
+```
