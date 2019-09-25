@@ -118,3 +118,78 @@ npm install -g create-next-app
 
 create-next-app my-app
 ```
+
+## [Prism](https://prismjs.com/index.html)高亮代码
+
+1.安装Prism
+
+```sh
+yarn add prismjs
+yarn add --dev babel-plugin-prismjs
+```
+
+2.配置
+
+```js
+// config-overrides.js
+const { override, useBabelRc } = require("customize-cra");
+
+module.exports = override(
+  useBabelRc(), // 启用.babelrc
+);
+```
+
+创建或修改.babelrc,添加babel-plugin-prismjs
+
+```json
+{
+  "presets": [
+    "babel-preset-react-app"
+  ],
+  "plugins": [
+    [
+      "prismjs",
+      {
+        "languages": [
+          "javascript",
+          "css",
+          "html"
+        ],
+        "plugins": [
+          "line-numbers",
+          "show-language"
+        ],
+        "theme": "tomorrow", //node_modules/prismjs/themes/prism-*.css
+        "css": true
+      }
+    ]
+  ]
+}
+```
+
+3.实例
+
+```js
+import React, { useState, useEffect } from 'react';
+import Prism from 'prismjs';
+
+function App() {
+  const [code] = useState(
+    `<Button type="primary">Button</Button>
+    <pre className="line-numbers">`)
+  useEffect(() => {
+    setTimeout(() => Prism.highlightAll(), 0)
+  }, [code]);
+  return (
+    <>
+      <pre className="line-numbers">
+        <code className="language-js">
+          {code}
+        </code>
+      </pre>
+    </>
+  );
+}
+
+export default App;
+```
