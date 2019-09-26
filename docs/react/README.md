@@ -175,8 +175,8 @@ import Prism from 'prismjs';
 
 function App() {
   const [code] = useState(
-    `<Button type="primary">Button</Button>
-    <pre className="line-numbers">`)
+    `const bar=1
+    const foo='123`)
   useEffect(() => {
     setTimeout(() => Prism.highlightAll(), 0)
   }, [code]);
