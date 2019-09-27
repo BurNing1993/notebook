@@ -1,5 +1,16 @@
 # React
 
+## [精选组件](https://ant.design/docs/react/recommendation-cn)
+
+::: tip
+避免重复造轮子
+:::
+
+| 类型        | 组件           |
+| ------------- |:-------------:|
+| 代码高亮      |[react-syntax-highlighter](https://github.com/conorhastings/react-syntax-highlighter)|
+| 富文本编辑器  |[react-quill](https://github.com/zenoamaro/react-quill),[Braft Editor](https://braft.margox.cn/)|
+
 ## 自定义配置(不eject)
 
 ::: tip
