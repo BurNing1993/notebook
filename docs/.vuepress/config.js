@@ -31,9 +31,11 @@ module.exports = {
     '@vuepress/active-header-links',
     '@vuepress/back-to-top',
     '@vuepress/nprogress',
-    '@vuepress/pwa', {
-      serviceWorker: true,
-      updatePopup: true
-    },
+    [
+      '@vuepress/pwa', {
+        serviceWorker: true,
+        updatePopup: true
+      }
+    ]
   ]
 }
