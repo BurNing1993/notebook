@@ -22,7 +22,7 @@ module.exports = {
       { text: 'React', link: '/react/' },
       { text: 'TypeScript', link: '/typescript/' },
       { text: 'Webpack', link: '/webpack/' },
-      { text: 'Tools', link: '/tools/' },
+      { text: 'Interview', link: '/interview/' },
       { text: 'Other', link: '/other/' },
       { text: 'Github', link: 'https://github.com/BurNing1993/notebook' },
     ]
