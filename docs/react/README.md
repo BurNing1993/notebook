@@ -10,6 +10,7 @@
 | ------------- |:-------------:|
 | 代码高亮      |[react-syntax-highlighter](https://github.com/conorhastings/react-syntax-highlighter)|
 | 富文本编辑器  |[react-quill](https://github.com/zenoamaro/react-quill),[Braft Editor](https://braft.margox.cn/)|
+| 代码分割      |[loadable-components](https://www.smooth-code.com/open-source/loadable-components/docs/getting-started/)|
 
 ## 自定义配置(不eject)
 
