@@ -4,7 +4,7 @@
 
 1. 静态资源代理
 
-* 基本配置
+- 基本配置
 
 ```sh
 server {
@@ -25,10 +25,10 @@ docker run \
 nginx
 ```
 
-* 设置密码
+- 设置密码
 
 ::: tip
-htpasswd命令是Apache的Web服务器内置工具，用于创建和更新储存用户名、域和用户基本认证的密码文件。
+htpasswd 命令是 Apache 的 Web 服务器内置工具，用于创建和更新储存用户名、域和用户基本认证的密码文件。
 :::
 
 htpasswd(选项)(参数)
@@ -51,7 +51,7 @@ htpasswd -bc passwd.db admin  123456 #在目录下生成一个passwd.db文件，
 htpasswd -b passwd.db  user 123456 #在原有密码文件中增加下一个用户
 ```
 
-Nginx配置
+Nginx 配置
 
 ```sh
 server {
@@ -78,13 +78,13 @@ docker run \
 nginx
 ```
 
-* 防盗链
-::: tip
-如果服务器的图片被别的网站盗链，将影响服务器的带宽以及访问速度，这时我们就需要设置图片文件或视频文件的防盗链功能。
+- 防盗链
+  ::: tip
+  如果服务器的图片被别的网站盗链，将影响服务器的带宽以及访问速度，这时我们就需要设置图片文件或视频文件的防盗链功能。
 
 防盗链功能，简单来说就是你可以直接访问该资源，但是不能将我的资源链接放到你自己的服务器上让别人访问，尤其是图片或视频这种比较大的文件，容易导致服务器响应很慢。
 
-要实现防盗链，需要了解HTTP协议中的请求头部的Referer头域和采用URL的格式表示访问当前网页或者文件的源地址。通过该头域的值，我们可以检测到访问目标资源的源地址。这样，如果我们检测到Referer头域中的值并不是自己站点内的URL，就采取组织措施，实现防盗链。需要注意是，由于Referer头域中的值可以被更改的，因此该方法不能完全阻止所有盗链行为。
+要实现防盗链，需要了解 HTTP 协议中的请求头部的 Referer 头域和采用 URL 的格式表示访问当前网页或者文件的源地址。通过该头域的值，我们可以检测到访问目标资源的源地址。这样，如果我们检测到 Referer 头域中的值并不是自己站点内的 URL，就采取组织措施，实现防盗链。需要注意是，由于 Referer 头域中的值可以被更改的，因此该方法不能完全阻止所有盗链行为。
 :::
 
 ```sh
@@ -106,10 +106,10 @@ server {
 ```
 
 ::: tip
-Nginx配置中有一个指令valid_referers，用来获取Referer头域中的值，并且根据该值的情况给Nginx全局变量$invalid_referer的值，如果Referer头域中没有符合valid_referers指令配置的值，$invalid_referer变量将会被赋值为1。
+Nginx 配置中有一个指令 valid_referers，用来获取 Referer 头域中的值，并且根据该值的情况给 Nginx 全局变量$invalid_referer的值，如果Referer头域中没有符合valid_referers指令配置的值，$invalid_referer 变量将会被赋值为 1。
 :::
 
-valid_referer指令的语法结构:
+valid_referer 指令的语法结构:
 
 ```sh
 valid_referers none | blocked | server_names | string ....;
@@ -121,14 +121,14 @@ server_names 设置一个或多个URL,检测Referer头域的值是否是这些UR
 
 ## Docker
 
-1. [Docker绿皮书](http://docs.nigeerhuo.com/docker/)
+1. [Docker 绿皮书](http://docs.nigeerhuo.com/docker/)
 
 ## [Github gh-page Action](http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html)
 
 1. react
-::: tip
-需要生成需要 GitHub 密钥,存储在Secrets.ACCESS_TOKEN中
-:::
+   ::: tip
+   需要生成需要 GitHub 密钥,存储在 Secrets.ACCESS_TOKEN 中
+   :::
 
 ```yml
 # .github/workflows/gh-pages.yml
@@ -141,14 +141,36 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@master
+      - name: Checkout
+        uses: actions/checkout@master
 
-    - name: Build and Deploy
-      uses: JamesIves/github-pages-deploy-action@master
-      env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: build
-        BUILD_SCRIPT: npm install && npm run build
+      - name: Build and Deploy
+        uses: JamesIves/github-pages-deploy-action@master
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: build
+          BUILD_SCRIPT: npm install && npm run build
 ```
+
+### Github gh-pages deploy
+
+```sh
+yarn add --dev  gh-pages
+```
+
+```json
+//package.json  homepage
+"homepage": "https://xxx.github.io/project_name/",
+//  package.json  scripts +
+"predeploy": "yarn build",
+"deploy": "gh-pages -d build" // build folder
+```
+
+```sh
+yarn deploy
+```
+
+:::tip
+build fail 切换下分支再切回去
+:::
