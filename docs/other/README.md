@@ -193,3 +193,6 @@ name="Joey"
 
 2. 使用变量
 
+## 模拟数据
+
+### [Mock.js](http://mockjs.com/)+[json-server](https://github.com/typicode/json-server#getting-started)
