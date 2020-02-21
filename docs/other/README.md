@@ -195,4 +195,10 @@ name="Joey"
 
 ## 模拟数据
 
-### [Mock.js](http://mockjs.com/)+[json-server](https://github.com/typicode/json-server#getting-started)
+### Mock.js + json-server
+
+:::tip
+[Mock.js](http://mockjs.com/)
+
+[json-server](https://github.com/typicode/json-server#getting-started)
+:::
