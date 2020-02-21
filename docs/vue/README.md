@@ -121,7 +121,7 @@ export default {
 
 ## 自定义指令
 
-* darg(拖拽)
+### darg(拖拽)
 
 ```js
 Vue.directive('darg', {
@@ -145,7 +145,7 @@ Vue.directive('darg', {
 });
 ```
 
-* rotate(旋转)
+### rotate(旋转)
 
 ```js
 Vue.directive('rotate', {
@@ -158,4 +158,27 @@ Vue.directive('rotate', {
     }
   }
 });
+```
+
+## 插件
+
+### [vue-cli-plugin-webpack-bundle-analyzer](https://www.npmjs.com/package/vue-cli-plugin-webpack-bundle-analyzer)
+
+- Install
+
+```sh
+vue add webpack-bundle-analyzer
+```
+
+- [Configuration](https://github.com/webpack-contrib/webpack-bundle-analyzer#options-for-plugin)
+
+```js
+// vue.config.js
+module.exports = {
+  pluginOptions: {
+    webpackBundleAnalyzer: {
+      openAnalyzer: process.env.NODE_ENV === 'production',
+    }
+  }
+};
 ```
