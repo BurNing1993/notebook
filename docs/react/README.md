@@ -6,12 +6,13 @@
 避免重复造轮子
 :::
 
-| 类型        | 组件           |
-| ------------- |:-------------:|
-| 代码高亮      |[react-syntax-highlighter](https://github.com/conorhastings/react-syntax-highlighter)|
-| 富文本编辑器  |[react-quill](https://github.com/zenoamaro/react-quill),[Braft Editor](https://braft.margox.cn/)|
+| 类型         |                                                   组件                                                   |
+| ------------ | :------------------------------------------------------------------------------------------------------: |
+| 代码高亮     |          [react-syntax-highlighter](https://github.com/conorhastings/react-syntax-highlighter)           |
+| 富文本编辑器 |     [react-quill](https://github.com/zenoamaro/react-quill),[Braft Editor](https://braft.margox.cn/)     |
+| 代码分割     | [loadable-components](https://www.smooth-code.com/open-source/loadable-components/docs/getting-started/) |
 
-## 自定义配置(不eject)
+## 自定义配置(不 eject)
 
 ::: tip
 使用 [Create React App](https://create-react-app.dev/) 创建的应用
@@ -122,7 +123,7 @@ yarn create react-app my-app --typescript
 
 1.[Next.js](https://nextjs.org/)
 
-使用create-next-app快速创建Next.js项目
+使用 create-next-app 快速创建 Next.js 项目
 
 ```sh
 npm install -g create-next-app
@@ -132,7 +133,7 @@ create-next-app my-app
 
 ## [Prism](https://prismjs.com/index.html)高亮代码
 
-1.安装Prism
+1.安装 Prism
 
 ```sh
 yarn add prismjs
@@ -146,30 +147,21 @@ yarn add --dev babel-plugin-prismjs
 const { override, useBabelRc } = require("customize-cra");
 
 module.exports = override(
-  useBabelRc(), // 启用.babelrc
+  useBabelRc() // 启用.babelrc
 );
 ```
 
-创建或修改.babelrc,添加babel-plugin-prismjs
+创建或修改.babelrc,添加 babel-plugin-prismjs
 
 ```json
 {
-  "presets": [
-    "babel-preset-react-app"
-  ],
+  "presets": ["babel-preset-react-app"],
   "plugins": [
     [
       "prismjs",
       {
-        "languages": [
-          "javascript",
-          "css",
-          "html"
-        ],
-        "plugins": [
-          "line-numbers",
-          "show-language"
-        ],
+        "languages": ["javascript", "css", "html"],
+        "plugins": ["line-numbers", "show-language"],
         "theme": "tomorrow", //node_modules/prismjs/themes/prism-*.css
         "css": true
       }
@@ -181,22 +173,21 @@ module.exports = override(
 3.实例
 
 ```js
-import React, { useState, useEffect } from 'react';
-import Prism from 'prismjs';
+import React, { useState, useEffect } from "react";
+import Prism from "prismjs";
 
 function App() {
   const [code] = useState(
     `const bar=1
-    const foo='123`)
+    const foo='123`
+  );
   useEffect(() => {
-    setTimeout(() => Prism.highlightAll(), 0)
+    setTimeout(() => Prism.highlightAll(), 0);
   }, [code]);
   return (
     <>
       <pre className="line-numbers">
-        <code className="language-js">
-          {code}
-        </code>
+        <code className="language-js">{code}</code>
       </pre>
     </>
   );
@@ -205,12 +196,12 @@ function App() {
 export default App;
 ```
 
-## React.lazy和Suspense实现动态引入和代码分割
+## React.lazy 和 Suspense 实现动态引入和代码分割
 
 ```js
-import React,{Suspense} from 'react';
-const OtherComponent = React.lazy(() => import('./OtherComponent'));
-const AnotherComponent = React.lazy(() => import('./AnotherComponent'));
+import React, { Suspense } from "react";
+const OtherComponent = React.lazy(() => import("./OtherComponent"));
+const AnotherComponent = React.lazy(() => import("./AnotherComponent"));
 
 function MyComponent() {
   return (
@@ -224,4 +215,26 @@ function MyComponent() {
     </div>
   );
 }
+```
+
+## TIPS
+
+### React 引入静态文件
+
+1. import
+
+```jsx
+import img from '/img/img.png';
+...
+<img src={img}  />
+```
+
+2. require
+
+```jsx
+<video width="320" height="240" loop muted data-autoplay autoPlay>
+  <source src={require('movie.mp4')} type="video/mp4">
+  <source src={require('movie.webm')} type="video/webm" />
+您的浏览器不支持Video标签。
+</video>
 ```

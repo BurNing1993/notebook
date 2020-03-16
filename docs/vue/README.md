@@ -118,3 +118,67 @@ export default {
 };
 </script>
 ```
+
+## 自定义指令
+
+### darg(拖拽)
+
+```js
+Vue.directive('darg', {
+  //指令绑定到元素
+  bind(el) {
+    // el.style.position = "absolute"
+    el.onmousedown = function (e) {
+      let disX = e.clientX - el.offsetLeft;
+      let disY = e.clientY - el.offsetTop;
+
+      document.onmousemove = function (e) {
+        el.style.left = e.clientX - disX + "px";
+        el.style.top = e.clientY - disY + "px";
+      };
+      document.onmouseup = function () {
+        document.onmousemove = null;
+      };
+      return false;
+    }
+  }
+});
+```
+
+### rotate(旋转)
+
+```js
+Vue.directive('rotate', {
+  bind(el) {
+    el.ondblclick = () => {
+      let deg = Number(el.dataset.deg) || 0;
+      deg += 90;
+      el.dataset.deg = deg
+      el.style.transform = `rotate(${deg}deg)`;
+    }
+  }
+});
+```
+
+## 插件
+
+### [vue-cli-plugin-webpack-bundle-analyzer](https://www.npmjs.com/package/vue-cli-plugin-webpack-bundle-analyzer)
+
+- Install
+
+```sh
+vue add webpack-bundle-analyzer
+```
+
+- [Configuration](https://github.com/webpack-contrib/webpack-bundle-analyzer#options-for-plugin)
+
+```js
+// vue.config.js
+module.exports = {
+  pluginOptions: {
+    webpackBundleAnalyzer: {
+      openAnalyzer: process.env.NODE_ENV === 'production',
+    }
+  }
+};
+```
