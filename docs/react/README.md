@@ -221,7 +221,7 @@ function MyComponent() {
 
 ### React 引入静态文件
 
-1. import
+- import
 
 ```jsx
 import img from '/img/img.png';
@@ -229,7 +229,7 @@ import img from '/img/img.png';
 <img src={img}  />
 ```
 
-2. require
+- require
 
 ```jsx
 <video width="320" height="240" loop muted data-autoplay autoPlay>

@@ -229,3 +229,43 @@ name="Joey"
 
 1. 不兼容变动时，以 BREAKING CHANGE 开头，后面是对变动的描述以及变动理由和迁移方法
 2. 如果当前 commit 针对某个 issue ，那么可以在 footer 部分关闭这个 issue
+
+## [Nginx缓存配置](https://www.digitalocean.com/community/tools/nginx)
+
+### 启用缓存
+
+```sh
+server{
+  ...
+  # assets
+  location ~* \.(?:css(\.map)?|js(\.map)?)$ {
+    expires 3h;
+    access_log off;
+  }
+
+  # media
+  location ~* \.(?:jpe?g|png|gif|ico|cur|heic|webp|tiff?|mp3|m4a|aac|ogg|midi?|wav|mp4|mov|webm|mpe?g|avi|ogv|flv|wmv)$ {
+    expires 7d;
+    access_log off;
+  }
+
+  # svg, fonts
+  location ~* \.(?:svgz?|ttf|ttc|otf|eot|woff2?)$ {
+    add_header Access-Control-Allow-Origin "*";
+    expires 7d;
+    access_log off;
+  }
+}
+```
+
+### 禁用缓存
+
+```sh
+server{
+  ...
+  location ~ .*\.(gif|jpg|jpeg|png|bmp|swf|js|css)$ {
+  #禁止缓存，每次都从服务器请求
+    add_header Cache-Control no-store;
+  }
+}
+```

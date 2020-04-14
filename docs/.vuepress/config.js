@@ -21,7 +21,7 @@ module.exports = {
       { text: 'Vue', link: '/vue/' },
       { text: 'React', link: '/react/' },
       { text: 'TypeScript', link: '/typescript/' },
-      { text: 'Webpack', link: '/webpack/' },
+      // { text: 'Webpack', link: '/webpack/' },
       { text: 'Interview', link: '/interview/' },
       { text: 'Other', link: '/other/' },
       { text: 'Github', link: 'https://github.com/BurNing1993/notebook' },
