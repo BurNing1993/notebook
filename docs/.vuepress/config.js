@@ -24,6 +24,7 @@ module.exports = {
       // { text: 'Webpack', link: '/webpack/' },
       { text: 'Interview', link: '/interview/' },
       { text: 'Other', link: '/other/' },
+      { text: '组件', link: '/components/' },
       { text: 'Github', link: 'https://github.com/BurNing1993/notebook' },
     ]
   },

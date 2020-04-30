@@ -269,3 +269,23 @@ server{
   }
 }
 ```
+
+
+## SpringBootApp 
+
+```sh
+# 打包
+cd 项目跟目录（和pom.xml同级）
+mvn clean package
+## 或者执行下面的命令
+## 排除测试代码后进行打包
+mvn clean package  -Dmaven.test.skip=true
+#  指定端口
+java -jar app.jar  --server.port=8000
+# 后台运行
+nohup java -jar XXX.jar &
+#  选择读取不同的配置文件
+java -jar app.jar --spring.profiles.active=dev
+# 设置 jvm 参数
+java -Xms10m -Xmx80m -jar app.jar &
+```
