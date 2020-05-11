@@ -238,3 +238,78 @@ import img from '/img/img.png';
 您的浏览器不支持Video标签。
 </video>
 ```
+
+## Mobx(ts+hooks)
+
+计数器实例
+
+1. 安装依赖
+
+```sh
+yarn add mobx mobx-react
+```
+
+2. store
+
+```ts
+// index.ts
+import { createContext, useContext } from 'react'
+import CountStore from './CountStore'
+
+const store = {
+  countStore: new CountStore()
+}
+
+const storeContext = createContext(store);
+
+export const useStore = () => useContext(storeContext);
+```
+
+```ts
+// CountStore.ts
+import { observable, action, computed } from 'mobx';
+
+export default class CountStore {
+
+  @observable
+  count: number = 0;
+
+  @action.bound
+  increase() {
+    this.count++;
+  }
+  @action.bound
+  decrease() {
+    this.count--;
+  }
+
+  @computed get doubleCount() {
+    return this.count * 2;
+  }
+} 
+```
+
+3. Counter
+
+```tsx
+//Counter.tsx
+import React from "react";
+import { useStore } from "./store";
+import { observer } from "mobx-react";
+
+function Counter() {
+  const {
+    countStore: { count, increase, decrease, doubleCount },
+  } = useStore();
+  return (
+    <>
+      <div>count:{count}</div>
+      <div>doubleCount:{doubleCount}</div>
+      <button onClick={ increase}>increase</button>
+      <button onClick={ decrease}>decrease</button>
+    </>
+  );
+}
+
+export default observer(Counter);
+```
