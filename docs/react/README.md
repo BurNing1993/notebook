@@ -12,7 +12,41 @@
 | 富文本编辑器 |     [react-quill](https://github.com/zenoamaro/react-quill),[Braft Editor](https://braft.margox.cn/)     |
 | 代码分割     | [loadable-components](https://www.smooth-code.com/open-source/loadable-components/docs/getting-started/) |
 
-## 自定义配置(不 eject)
+## 自定义配置([craco](https://github.com/gsoft-inc/craco))
+
+- 安装依赖
+
+```sh
+yarn add @craco/craco
+```
+
+- 修改 `package.json` 里的 `scripts` 属性
+
+```json
+/* package.json */
+"scripts": {
+-   "start": "react-scripts start",
+-   "build": "react-scripts build",
+-   "test": "react-scripts test",
++   "start": "craco start",
++   "build": "craco build",
++   "test": "craco test",
+}
+```
+
+- [配置](https://github.com/gsoft-inc/craco/blob/master/packages/craco/README.md#configuration-overview
+
+在项目根目录创建一个 craco.config.js 用于修改默认配置
+
+```
+/* craco.config.js */
+module.exports = {
+  // ...
+};
+```
+
+
+## 自定义配置(不 eject) react-app-rewired+customize-cra
 
 ::: tip
 使用 [Create React App](https://create-react-app.dev/) 创建的应用
