@@ -1,5 +1,30 @@
 # Other
 
+## ESLINT 配置
+
+```js
+//.eslintrc.js
+rules:{
+  semi: ['error', 'always'], //分号
+  'comma-dangle': ['error', 'always-multiline'], //逗号(仅多行)
+  'space-before-function-paren': ["error", { "anonymous": "always", "named": "never", "asyncArrow": "always" }], //方法前空格
+}
+```
+
+## 发布 NPM 包
+
+### 登录
+
+```sh
+npm login
+```
+
+- 查看账号
+
+```sh
+npm whoami
+```
+
 ## Nginx
 
 1. 静态资源代理
@@ -185,11 +210,11 @@ name="Joey"
 
 - 命名只能使用英文字母，数字和下划线，首个字符不能以数字开头。
 
-- 中间不能有空格，可以使用下划线（_）。
+- 中间不能有空格，可以使用下划线（\_）。
 
 - 不能使用标点符号。
 
-- 不能使用bash里的关键字（可用help命令查看保留关键字）。
+- 不能使用 bash 里的关键字（可用 help 命令查看保留关键字）。
 
 2. 使用变量
 
@@ -203,10 +228,18 @@ name="Joey"
 [json-server](https://github.com/typicode/json-server#getting-started)
 :::
 
-## Git提交日志规范
+## Git 提交日志规范
 
 ```html
-<type> (<scope>) : <subject>//空一行<body>//空一行<footer>
+<type>
+  (<scope
+    >) :
+    <subject
+      >//空一行
+      <body>
+        //空一行
+        <footer></footer></body></subject></scope
+></type>
 ```
 
 - type 用于说明 commit 的类型，只允许使用下面 7 个标识
@@ -230,7 +263,7 @@ name="Joey"
 1. 不兼容变动时，以 BREAKING CHANGE 开头，后面是对变动的描述以及变动理由和迁移方法
 2. 如果当前 commit 针对某个 issue ，那么可以在 footer 部分关闭这个 issue
 
-## [Nginx缓存配置](https://www.digitalocean.com/community/tools/nginx)
+## [Nginx 缓存配置](https://www.digitalocean.com/community/tools/nginx)
 
 ### 启用缓存
 
@@ -270,8 +303,7 @@ server{
 }
 ```
 
-
-## SpringBootApp 
+## SpringBootApp
 
 ```sh
 # 打包
