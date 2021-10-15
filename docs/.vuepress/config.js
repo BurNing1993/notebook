@@ -20,6 +20,7 @@ module.exports = {
       { text: 'Home', link: '/' },
       { text: 'Vue', link: '/vue/' },
       { text: 'React', link: '/react/' },
+      { text: 'JavaScript', link: '/js/' },
       { text: 'TypeScript', link: '/typescript/' },
       { text: 'Css', link: '/css/' },
       { text: 'Interview', link: '/interview/' },
