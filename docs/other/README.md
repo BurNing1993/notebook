@@ -1,5 +1,41 @@
 # Other
 
+## VSCode
+
+### [JSDoc](https://jsdoc.app/index.html)
+
+```js
+//@ts-check
+
+/** @type {import('playwright').Page} */
+let page;
+```
+
+- [@type](https://jsdoc.app/tags-type.html)
+
+```js
+/** @type {(string|Array.)} */
+var foo;
+/** @const {number} */
+var FOO = 1;
+```
+
+- [@typedef](https://jsdoc.app/tags-typedef.html)
+
+```js
+/**
+ * A number, or a string containing a number.
+ * @typedef {(number|string)} NumberLike
+ */
+
+/**
+ * Set the magic number.
+ * @param {NumberLike} x - The magic number.
+ */
+function setMagicNumber(x) {
+}
+```
+
 ## ESLINT 配置
 
 ```js
