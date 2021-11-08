@@ -22,6 +22,7 @@ module.exports = {
       { text: 'React', link: '/react/' },
       { text: 'JavaScript', link: '/js/' },
       { text: 'TypeScript', link: '/typescript/' },
+      { text: 'Html', link: '/html/' },
       { text: 'Css', link: '/css/' },
       { text: 'Interview', link: '/interview/' },
       { text: 'Other', link: '/other/' },
