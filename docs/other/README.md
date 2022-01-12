@@ -264,7 +264,7 @@ Dockerfile是用来构建Docker镜像的构建文件，是由一系列命令和�
 
 ```yml
 # .github/workflows/gh-pages.yml
-name: GitHub gh-page Actions
+name: GitHub Page Actions
 on:
   push:
     branches:
@@ -273,16 +273,20 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@master
-
-      - name: Build and Deploy
-        uses: JamesIves/github-pages-deploy-action@master
-        env:
-          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: build
-          BUILD_SCRIPT: npm install && npm run build
+    - name: Checkout 🛎️
+      uses: actions/checkout@v2
+    - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+        cache: 'npm' # yarn
+    - run: npm install # yarn install
+    - run: npm run build # yarn build
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+          branch: gh-pages # The branch the action should deploy to.
+          folder: docs/.vuepress/dist # The folder the action should deploy.
 ```
 
 ### Github gh-pages deploy
