@@ -276,12 +276,14 @@ jobs:
     - name: Checkout 🛎️
       uses: actions/checkout@v2
     - name: Install and Build 🔧 # This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.
-    - uses: actions/setup-node@v2
+      uses: actions/setup-node@v2
       with:
         node-version: '16'
         cache: 'npm' # yarn
-    - run: npm install # yarn install
-    - run: npm run build # yarn build
+    - name: Install dependencies and build
+      run: | 
+         npm install 
+         npm run build
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@v4
       with:
