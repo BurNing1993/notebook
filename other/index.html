@@ -15,7 +15,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
     <meta name="msapplication-TileColor" content="#000000">
-    <link rel="preload" href="/notebook/assets/css/0.styles.30a3181b.css" as="style"><link rel="preload" href="/notebook/assets/js/app.f3f1b58a.js" as="script"><link rel="preload" href="/notebook/assets/js/2.f546fd41.js" as="script"><link rel="preload" href="/notebook/assets/js/14.2dbdcda3.js" as="script"><link rel="preload" href="/notebook/assets/js/3.5194bc92.js" as="script"><link rel="prefetch" href="/notebook/assets/js/10.a3ac9f5f.js"><link rel="prefetch" href="/notebook/assets/js/11.dbc06298.js"><link rel="prefetch" href="/notebook/assets/js/12.902b60dd.js"><link rel="prefetch" href="/notebook/assets/js/13.bf7f6b29.js"><link rel="prefetch" href="/notebook/assets/js/15.5eff2cbe.js"><link rel="prefetch" href="/notebook/assets/js/16.8c5e9eda.js"><link rel="prefetch" href="/notebook/assets/js/17.cb26da37.js"><link rel="prefetch" href="/notebook/assets/js/18.a42eef60.js"><link rel="prefetch" href="/notebook/assets/js/19.ff9bfae5.js"><link rel="prefetch" href="/notebook/assets/js/4.e3e1e6db.js"><link rel="prefetch" href="/notebook/assets/js/5.0d10e945.js"><link rel="prefetch" href="/notebook/assets/js/6.73bbcf8d.js"><link rel="prefetch" href="/notebook/assets/js/7.f32cee4a.js"><link rel="prefetch" href="/notebook/assets/js/8.b9a58496.js"><link rel="prefetch" href="/notebook/assets/js/9.3bd47329.js">
+    <link rel="preload" href="/notebook/assets/css/0.styles.30a3181b.css" as="style"><link rel="preload" href="/notebook/assets/js/app.696fdfef.js" as="script"><link rel="preload" href="/notebook/assets/js/2.f546fd41.js" as="script"><link rel="preload" href="/notebook/assets/js/14.78a3650f.js" as="script"><link rel="preload" href="/notebook/assets/js/3.5194bc92.js" as="script"><link rel="prefetch" href="/notebook/assets/js/10.a3ac9f5f.js"><link rel="prefetch" href="/notebook/assets/js/11.dbc06298.js"><link rel="prefetch" href="/notebook/assets/js/12.902b60dd.js"><link rel="prefetch" href="/notebook/assets/js/13.bf7f6b29.js"><link rel="prefetch" href="/notebook/assets/js/15.5eff2cbe.js"><link rel="prefetch" href="/notebook/assets/js/16.8c5e9eda.js"><link rel="prefetch" href="/notebook/assets/js/17.cb26da37.js"><link rel="prefetch" href="/notebook/assets/js/18.a42eef60.js"><link rel="prefetch" href="/notebook/assets/js/19.ff9bfae5.js"><link rel="prefetch" href="/notebook/assets/js/4.e3e1e6db.js"><link rel="prefetch" href="/notebook/assets/js/5.0d10e945.js"><link rel="prefetch" href="/notebook/assets/js/6.73bbcf8d.js"><link rel="prefetch" href="/notebook/assets/js/7.f32cee4a.js"><link rel="prefetch" href="/notebook/assets/js/8.b9a58496.js"><link rel="prefetch" href="/notebook/assets/js/9.3bd47329.js">
     <link rel="stylesheet" href="/notebook/assets/css/0.styles.30a3181b.css">
   </head>
   <body>
@@ -183,13 +183,15 @@ docker search --filter <span class="token assign-left variable">stars</span><spa
     <span class="token key atrule">steps</span><span class="token punctuation">:</span>
     <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Checkout 🛎️
       <span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/checkout@v2
-    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Install and Build 🔧 <span class="token comment"># This example project is built using npm and outputs the result to the 'build' folder. Replace with the commands required to build your project, or remove this step entirely if your site is pre-built.</span>
-    <span class="token punctuation">-</span> <span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/setup<span class="token punctuation">-</span>node@v2
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Node 
+      <span class="token key atrule">uses</span><span class="token punctuation">:</span> actions/setup<span class="token punctuation">-</span>node@v2
       <span class="token key atrule">with</span><span class="token punctuation">:</span>
         <span class="token key atrule">node-version</span><span class="token punctuation">:</span> <span class="token string">'16'</span>
         <span class="token key atrule">cache</span><span class="token punctuation">:</span> <span class="token string">'npm'</span> <span class="token comment"># yarn</span>
-    <span class="token punctuation">-</span> <span class="token key atrule">run</span><span class="token punctuation">:</span> npm install <span class="token comment"># yarn install</span>
-    <span class="token punctuation">-</span> <span class="token key atrule">run</span><span class="token punctuation">:</span> npm run build <span class="token comment"># yarn build</span>
+    <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Install dependencies and build
+      <span class="token key atrule">run</span><span class="token punctuation">:</span> <span class="token punctuation">|</span><span class="token scalar string"> 
+         npm install 
+         npm run build</span>
     <span class="token punctuation">-</span> <span class="token key atrule">name</span><span class="token punctuation">:</span> Deploy
       <span class="token key atrule">uses</span><span class="token punctuation">:</span> JamesIves/github<span class="token punctuation">-</span>pages<span class="token punctuation">-</span>deploy<span class="token punctuation">-</span>action@v4
       <span class="token key atrule">with</span><span class="token punctuation">:</span>
@@ -278,7 +280,7 @@ module<span class="token punctuation">.</span><span class="token function-variab
     <span class="token comment">// }</span>
   <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">(</span>req<span class="token punctuation">,</span> res<span class="token punctuation">)</span>
 <span class="token punctuation">}</span>
-</code></pre></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">LastUpdated:</span> <span class="time">1/12/2022, 11:40:02 AM</span></div></footer> <!----> </main></div><div class="global-ui"><!----><!----></div></div>
-    <script src="/notebook/assets/js/app.f3f1b58a.js" defer></script><script src="/notebook/assets/js/2.f546fd41.js" defer></script><script src="/notebook/assets/js/14.2dbdcda3.js" defer></script><script src="/notebook/assets/js/3.5194bc92.js" defer></script>
+</code></pre></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">LastUpdated:</span> <span class="time">1/17/2022, 1:17:22 AM</span></div></footer> <!----> </main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/notebook/assets/js/app.696fdfef.js" defer></script><script src="/notebook/assets/js/2.f546fd41.js" defer></script><script src="/notebook/assets/js/14.78a3650f.js" defer></script><script src="/notebook/assets/js/3.5194bc92.js" defer></script>
   </body>
 </html>
