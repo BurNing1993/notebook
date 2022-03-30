@@ -1,5 +1,239 @@
 # Other
 
+## 代码规范
+
+### EditorConfig
+
+> <https://editorconfig.org/>
+
+- .editorconfig
+
+```sh
+# Editor configuration, see http://editorconfig.org
+
+# 表示是最顶层的 EditorConfig 配置文件
+root = true
+
+[*] # 表示所有文件适用
+charset = utf-8 # 设置文件字符集为 utf-8
+indent_style = space # 缩进风格（tab | space）
+indent_size = 2 # 缩进大小
+end_of_line = lf # 控制换行类型(lf | cr | crlf)
+trim_trailing_whitespace = true # 去除行首的任意空白字符
+insert_final_newline = true # 始终在文件末尾插入一个新行
+
+[*.md] # 表示仅 md 文件适用以下规则
+max_line_length = off
+trim_trailing_whitespace = false
+```
+
+### Prettier
+
+> <https://prettier.io/>
+
+- install
+
+```sh
+npm i prettier -D
+```
+
+```sh
+yarn add -D prettier
+```
+
+- [配置 .prettierrc](https://prettier.io/docs/en/options.html)
+
+```json
+{
+  "printWidth": 100,
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "semi": false
+}
+```
+
+- 格式化
+
+```sh
+# 格式化所有文件（. 表示所有文件）
+npx prettier --write .
+```
+
+### ESLint
+
+- install
+
+```sh
+npm i eslint -D # npm
+yarn add -D eslint # yarn1
+```
+
+- 配置
+
+```sh
+npx eslint --init
+```
+
+执行命令,生成配置
+
+### Prettier 和 ESLint 的冲突
+
+- install
+
+```sh
+npm i eslint-plugin-prettier eslint-config-prettier -D # npm
+yarn add -D  eslint-plugin-prettier eslint-config-prettier # yarn1
+```
+
+- 配置
+
+```js
+// .eslintrc.js
+module.exports = {
+  ...
+  extends: [
+    'plugin:vue/essential',
+    'airbnb-base',
+    'plugin:prettier/recommended' // 添加 prettier 插件
+  ],
+  ...
+}
+```
+
+> Prettier 配置规则 > ESLint 配置规则
+
+执行 eslint --fix 命令时，ESLint 就会按照 Prettier 的配置规则来格式化代码
+
+### husky & lint-staged
+
+> [husky](https://typicode.github.io/husky/#/?id=usage) —— Git Hook 工具，可以设置在 git 各个阶段（pre-commit、commit-msg、pre-push 等）触发我们的命令。
+> [lint-staged](https://github.com/okonet/lint-staged) —— 在 git 暂存的文件上运行 linters。
+
+#### husky 自动配置
+
+- 初始化
+
+```sh
+npx husky-init && npm install       # npm
+npx husky-init && yarn              # Yarn 1
+```
+
+- 配置,修改 .husky/pre-commit
+
+```bash
+# .husky/pre-commit
+eslint --fix ./src --ext .vue,.js,.ts
+```
+
+### lint-staged
+
+- 安装
+
+```sh
+npm i lint-staged -D #npm
+yarn add lint-staged -D #yarn1
+```
+
+- 配置
+
+```json
+// package.json 增加
+"lint-staged": {
+  "*.{vue,js,ts}": "eslint --fix"
+},
+```
+
+- 配置 husky
+
+```bash
+# 修改 .husky/pre-commit
+npx lint-staged
+```
+
+## Git 提交规范
+
+### Angular commit message 格式规范
+
+> [Angular 项目提交信息格式](https://github.com/angular/angular/blob/master/CONTRIBUTING.md#commit)
+
+commit message 由 Header、Body、Footer 组成。
+
+```txt
+<header>
+<BLANK LINE>
+<body>
+<BLANK LINE>
+<footer>
+```
+
+- Header 部分包括三个字段 type（必需）、scope（可选）和 subject（必需）。
+
+```sh
+<type>(<scope>): <short summary>
+  │       │             │
+  │       │             └─⫸ Summary in present tense. Not capitalized. No period at the end.
+  │       │
+  │       └─⫸ Commit Scope: |common|core|forms|router|service-worker|changelog|docs|
+  │
+  └─⫸ Commit Type: build|ci|docs|feat|fix|perf|refactor|test
+```
+
+- body 是对本次 commit 的详细描述，可以分成多行。（body 可省略）跟 subject 类似，用动词开头，body 应该说明修改的原因和更改前后的行为对比。
+
+- footer 是可选的.
+
+### [Commitizen](https://github.com/commitizen/cz-cli)
+
+> Commitizen 是一个帮助撰写规范 commit message 的工具。它有一个命令行工具 cz-cli。
+
+- 安装
+
+```sh
+npm install commitizen -D
+yarn add -D commitizen
+```
+
+- 初始化
+
+```sh
+npx commitizen init cz-conventional-changelog --save-dev --save-exact
+npx commitizen init cz-conventional-changelog --yarn --dev --exact
+```
+
+- 使用 Commitizen
+
+```sh
+git cz
+```
+
+- cz-customizable 自定义配置提交说明
+
+```sh
+npx commitizen init cz-customizable --save-dev --save-exact --force
+```
+
+### 集成 commitlint 验证提交规范
+
+- 安装
+
+```sh
+npm i @commitlint/config-conventional @commitlint/cli -D
+yarn add -D  @commitlint/config-conventional @commitlint/cli
+```
+
+- 配置 commitlint.config.js
+
+```sh
+module.exports = { extends: ['@commitlint/config-conventional'] }
+
+```
+
+- 使用 husky 的 commit-msg hook 触发验证提交信息的命令
+
+```sh
+npx husky add .husky/commit-msg "npx --no-install commitlint --edit $1"
+```
+
 ## VSCode
 
 ### [JSDoc](https://jsdoc.app/index.html)
@@ -32,8 +266,7 @@ var FOO = 1;
  * Set the magic number.
  * @param {NumberLike} x - The magic number.
  */
-function setMagicNumber(x) {
-}
+function setMagicNumber(x) {}
 ```
 
 ## ESLINT 配置
@@ -220,8 +453,7 @@ docker search --filter stars=30 tomcat # 搜索start>30的tomcat镜像
 
 3. docker pull image [:TAG]
 
-
-4. docker rmi  imageID 删除镜像
+4) docker rmi imageID 删除镜像
 
 ```sh
 docker rmi -f $(docker images -qa) # 删除全部镜像
@@ -229,31 +461,31 @@ docker rmi -f $(docker images -qa) # 删除全部镜像
 
 ### Dockerfile
 
-Dockerfile是用来构建Docker镜像的构建文件，是由一系列命令和参数构成的脚本。
+Dockerfile 是用来构建 Docker 镜像的构建文件，是由一系列命令和参数构成的脚本。
 
 #### 构建步骤
 
-- 编写Dockerfile文件
+- 编写 Dockerfile 文件
 - docker build [-f DockerfilePath] -t imageName:tag .
 
 #### 关键字
 
-- FROM  基础镜像，当前新镜像是基于哪个镜像的
-- MAINTAINER   镜像维护者的姓名和邮箱地址
-- RUN   容器构建时需要运行的命令
-- EXPOSE   当前容器对外暴露出的端口
-- WORKDIR   指定在创建容器后，终端默认登陆的进来工作目录，一个落脚点
-- ENV   用来在构建镜像过程中设置环境变量
-- ADD   将宿主机目录下的文件拷贝进镜像且ADD命令会自动处理URL和解压tar压缩包
-- COPY   将从构建上下文目录中 <源路径> 的文件/目录复制到新的一层的镜像内的 <目标路径> 位置
-- VOLUME   容器数据卷，用于数据保存和持久化工作
-- CMD   指定一个容器启动时要运行的命令 Dockerfile 中可以有多个 CMD 指令，但只有最后一个生效，CMD 会被 docker run 之后的参数替换
-- ENTRYPOINT​ 指定一个容器启动时要运行的命令 ENTRYPOINT 的目的和CMD一样，都是在指定容器启动程序及参数
-- ONBUILD 当构建一个被继承的Dockerfile时运行命令，父镜像在被子继承后父镜像的onbuild被触发
+- FROM 基础镜像，当前新镜像是基于哪个镜像的
+- MAINTAINER 镜像维护者的姓名和邮箱地址
+- RUN 容器构建时需要运行的命令
+- EXPOSE 当前容器对外暴露出的端口
+- WORKDIR 指定在创建容器后，终端默认登陆的进来工作目录，一个落脚点
+- ENV 用来在构建镜像过程中设置环境变量
+- ADD 将宿主机目录下的文件拷贝进镜像且 ADD 命令会自动处理 URL 和解压 tar 压缩包
+- COPY 将从构建上下文目录中 <源路径> 的文件/目录复制到新的一层的镜像内的 <目标路径> 位置
+- VOLUME 容器数据卷，用于数据保存和持久化工作
+- CMD 指定一个容器启动时要运行的命令 Dockerfile 中可以有多个 CMD 指令，但只有最后一个生效，CMD 会被 docker run 之后的参数替换
+- ENTRYPOINT​ 指定一个容器启动时要运行的命令 ENTRYPOINT 的目的和 CMD 一样，都是在指定容器启动程序及参数
+- ONBUILD 当构建一个被继承的 Dockerfile 时运行命令，父镜像在被子继承后父镜像的 onbuild 被触发
 
 ### 网络
 
-#### [Docker容器互访](https://www.cnblogs.com/shenh/p/9714547.html)
+#### [Docker 容器互访](https://www.cnblogs.com/shenh/p/9714547.html)
 
 ## [Github gh-page Action](http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html)
 
@@ -273,20 +505,20 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout 🛎️
-      uses: actions/checkout@v2
-    - name: Node 
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16'
-        cache: 'npm' # yarn
-    - name: Install dependencies and build
-      run: | 
-         npm install 
-         npm run build
-    - name: Deploy
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+      - name: Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+          cache: "npm" # yarn
+      - name: Install dependencies and build
+        run: |
+          npm install 
+          npm run build
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
           branch: gh-pages # The branch the action should deploy to.
           folder: docs/.vuepress/dist # The folder the action should deploy.
 ```
@@ -340,41 +572,6 @@ name="Joey"
 
 [json-server](https://github.com/typicode/json-server#getting-started)
 :::
-
-## Git 提交日志规范
-
-```html
-<type>
-  (<scope
-    >) :
-    <subject
-      >//空一行
-      <body>
-        //空一行
-        <footer></footer></body></subject></scope
-></type>
-```
-
-- type 用于说明 commit 的类型，只允许使用下面 7 个标识
-
-1. feat: 新功能（feature）
-2. fix: 修补 Bug
-3. docs: 文档 （documention）
-4. style: 样式 （不影响代码运行的变动）
-5. refactor: 重构 （既不是新增功能，也不是修改 Bug 的代码变动）
-6. test: 增加测试
-7. chore: 构建过程或辅助工具的变动
-
-- scope 用于说明 commit 影响的范围，比如数据层、控制层、视图层等，视项目不同而不同
-
-- subject 是 commit 目的的简短描述，不超过 50 个字符
-
-- body 部分是对本次 commit 的详细描述，可以分成多行
-
-- footer 部分只用于两种情况
-
-1. 不兼容变动时，以 BREAKING CHANGE 开头，后面是对变动的描述以及变动理由和迁移方法
-2. 如果当前 commit 针对某个 issue ，那么可以在 footer 部分关闭这个 issue
 
 ## [Nginx 缓存配置](https://www.digitalocean.com/community/tools/nginx)
 
@@ -451,18 +648,18 @@ java -Xms10m -Xmx80m -jar app.jar &
 
 ```js
 // /api/proxy.js
-const { createProxyMiddleware } = require('http-proxy-middleware')
+const { createProxyMiddleware } = require("http-proxy-middleware");
 
 module.exports = (req, res) => {
   // 创建代理对象并转发请求
   createProxyMiddleware({
-    target:'http://example.com/',
-    changeOrigin: true,
+    target: "http://example.com/",
+    changeOrigin: true
     // pathRewrite: {
     //   // 通过路径重写，去除请求路径中的 `/backend`
     //   // 例如 /backend/user/login 将被转发到 http://backend-api.com/user/login
     //   '^/api/': '/'
     // }
-  })(req, res)
-}
+  })(req, res);
+};
 ```
