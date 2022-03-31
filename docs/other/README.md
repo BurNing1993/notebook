@@ -271,6 +271,32 @@ function setMagicNumber(x) {}
 
 ## ESLINT 配置
 
+### React hooks ESlint
+
+- 安装
+
+```sh
+npm install eslint-plugin-react-hooks --save-dev
+yarn add -D eslint-plugin-react-hooks
+```
+
+- 配置
+
+```js
+// 你的 ESLint 配置
+{
+  "plugins": [
+    // ...
+    "react-hooks"
+  ],
+  "rules": {
+    // ...
+    "react-hooks/rules-of-hooks": "error", // 检查 Hook 的规则
+    "react-hooks/exhaustive-deps": "warn" // 检查 effect 的依赖
+  }
+}
+```
+
 ```js
 //.eslintrc.js
 rules:{
