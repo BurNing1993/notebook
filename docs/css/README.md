@@ -37,3 +37,34 @@ img.error::after {
 ```
 
 ![图片加载失败](./err-img.png)
+
+## [Header粘滞效果](https://www.zhangxinxu.com/wordpress/2022/04/css-sticky-size-change/)
+
+```html
+<header>
+    <header-inner>
+        ...
+    </header-inner>
+</header>
+```
+
+```css
+header {
+    --height-outer: 120px;
+    --height-inner: 60px;
+    /* by zhangxinxu */
+    display: flex;
+    align-items: center;
+    position: sticky;
+    height: var(--height-outer);
+    top: calc(var(--height-inner) - var(--height-outer));
+}
+header-inner {
+    display: flex;
+    line-height: var(--height-inner);
+    position: sticky;
+    top: 0; 
+}
+```
+
+> 外层元素粘性定位，设置 top 属性值为负的内外高度的差值，内层元素也是粘性定位，设置 top 属性值为 0，保证吸顶效果。
