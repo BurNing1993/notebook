@@ -689,3 +689,38 @@ module.exports = (req, res) => {
   })(req, res);
 };
 ```
+
+## robots.txt
+
+<https://www.robotstxt.org/robotstxt.html>
+
+- 允许所有搜索引擎收录本站
+
+robots.txt为空就可以，什么都不要写。
+
+```text
+User-agent: *
+Disallow:
+```
+
+- 禁止所有SE收录网站的某些目录：
+
+```text
+User-agent: *
+Disallow: /path1/
+Disallow: /path2/
+```
+
+- 禁止某个搜索引擎收录本站，例如禁止百度
+
+```text
+User-agent: Baiduspider
+Disallow: /
+```
+
+- 禁止所有搜索引擎收录本站
+
+```text
+User-agent: *
+Disallow: /
+```
