@@ -724,3 +724,139 @@ Disallow: /
 User-agent: *
 Disallow: /
 ```
+
+## electron github action
+
+> https://www.electron.build/configuration/publish#github-repository
+
+## GH_TOKEN
+
+- https://github.com/settings/tokens/new
+- repo/settings/secrets/actions > Repository secrets
+
+### scripts
+
+```json
+{
+  // package.json
+  "scripts": {
+    "release": "npm run build && electron-builder build -c electron-builder.config.js -p always",
+  },
+}
+```
+
+### action yml
+
+```yml
+# .github/workflows/release.yml
+name: Build/release
+
+on:
+  push:
+    # branches: [ main ]
+    # Sequence of patterns matched against refs/tags
+    tags:
+      - "v*" # Push events to matching v*, i.e. v1.0, v20.15.10
+
+jobs:
+  release:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - uses: actions/cache@v3
+        name: Setup pnpm cache
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: publish windows app
+        if: matrix.os == 'windows-latest'
+        run: pnpm run release --win
+        env:
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
+
+      - name: publish mac app
+        if: matrix.os == 'macos-latest'
+        run: pnpm run release --mac
+        env:
+          GH_TOKEN: ${{secrets.GH_TOKEN}}
+```
+
+## npmrc
+
+```txt
+ELECTRON_BUILDER_BINARIES_MIRROR=https://registry.npmmirror.com/electron-builder-binaries/
+
+ELECTRON_MIRROR=https://registry.npmmirror.com/electron/
+
+home=https://www.npmjs.org
+registry=https://registry.npmmirror.com/
+disturl=https://registry.npmmirror.com/dist
+
+
+msvs_version=2022
+
+sass_binary_site=https://registry.npmmirror.com/node-sass
+
+# python=C:\Python27\python.exe
+
+chromedriver-cdnurl=https://registry.npmmirror.com/chromedriver
+couchbase-binary-host-mirror=https://registry.npmmirror.com/couchbase/v{version}
+debug-binary-host-mirror=https://registry.npmmirror.com/node-inspector
+flow-bin-binary-host-mirror=https://registry.npmmirror.com/flow/v
+fse-binary-host-mirror=https://registry.npmmirror.com/fsevents
+fuse-bindings-binary-host-mirror=https://registry.npmmirror.com/fuse-bindings/v{version}
+git4win-mirror=https://registry.npmmirror.com/git-for-windows
+gl-binary-host-mirror=https://registry.npmmirror.com/gl/v{version}
+grpc-node-binary-host-mirror=https://npm.taobao.org/mirrors
+hackrf-binary-host-mirror=https://registry.npmmirror.com/hackrf/v{version}
+leveldown-binary-host-mirror=https://registry.npmmirror.com/leveldown/v{version}
+leveldown-hyper-binary-host-mirror=https://registry.npmmirror.com/leveldown-hyper/v{version}
+mknod-binary-host-mirror=https://registry.npmmirror.com/mknod/v{version}
+node-sqlite3-binary-host-mirror=https://npm.taobao.org/mirrors
+node-tk5-binary-host-mirror=https://registry.npmmirror.com/node-tk5/v{version}
+nodegit-binary-host-mirror=https://registry.npmmirror.com/nodegit/v{version}/
+operadriver-cdnurl=https://registry.npmmirror.com/operadriver
+phantomjs-cdnurl=https://registry.npmmirror.com/phantomjs
+profiler-binary-host-mirror=https://registry.npmmirror.com/node-inspector/
+puppeteer-download-host=https://npm.taobao.org/mirrors
+python-mirror=https://registry.npmmirror.com/python
+rabin-binary-host-mirror=https://registry.npmmirror.com/rabin/v{version}
+sass-binary-site=https://registry.npmmirror.com/node-sass
+sodium-prebuilt-binary-host-mirror=https://registry.npmmirror.com/sodium-prebuilt/v{version}
+sqlite3-binary-site=https://registry.npmmirror.com/sqlite3
+utf-8-validate-binary-host-mirror=https://registry.npmmirror.com/utf-8-validate/v{version}
+utp-native-binary-host-mirror=https://registry.npmmirror.com/utp-native/v{version}
+zmq-prebuilt-binary-host-mirror=https://registry.npmmirror.com/zmq-prebuilt/v{version}
+
+```

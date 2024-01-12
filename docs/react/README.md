@@ -12,7 +12,25 @@
 | 富文本编辑器 |     [react-quill](https://github.com/zenoamaro/react-quill),[Braft Editor](https://braft.margox.cn/)     |
 | 代码分割     | [loadable-components](https://www.smooth-code.com/open-source/loadable-components/docs/getting-started/) |
 
-## 自定义配置([craco](https://github.com/gsoft-inc/craco))
+## ReactApp Eslint
+
+> https://github.com/facebook/create-react-app/tree/main/packages/eslint-config-react-app
+
+```sh
+npm install --save-dev eslint-config-react-app eslint
+yarn add -D eslint-config-react-app eslint
+pnpm add -D eslint-config-react-app eslint
+```
+
+### `.eslintrc.json`
+
+```json
+{
+  "extends": "react-app"
+}
+```
+
+## CRA自定义配置([craco](https://github.com/gsoft-inc/craco))
 
 - 安装依赖
 
